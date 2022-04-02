@@ -1,10 +1,7 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { DEFAULT_HEIGHT, DEFAULT_WIDTH, GameStateService } from './game-state.service';
+import { GameStateService } from './game-state.service';
 import { BoardEntry } from '../models/board-entry.model';
 import { GameType } from '../models/game-type.model';
-
-beforeEach(() => {});
+import { DEFAULT_HEIGHT, DEFAULT_WIDTH } from './game-state.constants';
 
 test('initialize default game state', () => {
   const gameState = new GameStateService();

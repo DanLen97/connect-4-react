@@ -1,12 +1,17 @@
 import { GameState } from '../models/game-state.model';
 import { GameType } from '../models/game-type.model';
 import { Player } from '../models/player.model';
+import { generateDefaultBoard } from './game-state.constants';
 
-export const DEFAULT_WIDTH = 7;
-export const DEFAULT_HEIGHT = 6;
+
 
 export class GameStateService {
   private readonly state: GameState;
+
+
+  public get gameState() {
+    return this.state;
+  }
 
   public get boardState() {
     return this.state.board.boardState;
@@ -24,13 +29,7 @@ export class GameStateService {
   constructor(
     { initialState }: { initialState: GameState } = {
       initialState: {
-        board: {
-          width: DEFAULT_WIDTH,
-          height: DEFAULT_HEIGHT,
-          boardState: Array.from({
-            length: DEFAULT_WIDTH * DEFAULT_HEIGHT,
-          }).map((_) => ({})),
-        },
+        board: generateDefaultBoard(),
         currentPlayerId: 1,
         players: [{ id: 1, color: 'blue' }],
         gameType: GameType.PVP

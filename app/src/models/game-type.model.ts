@@ -1,3 +1,4 @@
 export enum GameType {
-  PVP = 0
+  PVP = 0,
+  PVE
 }
