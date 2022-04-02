@@ -1,10 +1,11 @@
 import { GameState } from '../models/game-state.model';
+import { GameType } from '../models/game-type.model';
 import { Player } from '../models/player.model';
 
 export const DEFAULT_WIDTH = 7;
 export const DEFAULT_HEIGHT = 6;
 
-export class EngineService {
+export class GameStateService {
   private readonly state: GameState;
 
   public get boardState() {
@@ -19,10 +20,10 @@ export class EngineService {
     return this.state.board.height;
   }
 
-
+  // TODO: allow partial init state
   constructor(
-    { initalState }: { initalState: GameState } = {
-      initalState: {
+    { initialState }: { initialState: GameState } = {
+      initialState: {
         board: {
           width: DEFAULT_WIDTH,
           height: DEFAULT_HEIGHT,
@@ -32,23 +33,27 @@ export class EngineService {
         },
         currentPlayerId: 1,
         players: [{ id: 1, color: 'blue' }],
+        gameType: GameType.PVP
       },
     }
   ) {
-    this.state = initalState;
+    this.state = initialState;
   }
 
-  public makeMove({ move }: { move: number }): boolean {
+  public makeMove({ column }: { column: number }): boolean {
     // move is x value in interval [0,width]
     const state = this.state;
 
-    // TODO: check if move is in interval
+    // check if move is in interval
+    if (column < 0 || column >= this.boardWidth) {
+      return false;
+    }
 
     const moveIdx = Array.from({ length: state.board.height })
-      .map((_, i) => i * state.board.width + move)
-      .filter((x) => !state.board.boardState[x])[0];
+      .map((_, i) => i * state.board.width + column)
+      .filter((x) => !state.board.boardState[x].playerId)[0];
 
-    if (!moveIdx) {
+    if (moveIdx === undefined) {
       return false;
     }
 
@@ -63,7 +68,8 @@ export class EngineService {
   public isValidGameState(): boolean {
     const state = this.state;
     const isValidSize = state.board.height !== 0 && state.board.width !== 0;
+    const isValidArraySize = state.board.boardState.length === state.board.height * state.board.width;
 
-    return isValidSize;
+    return isValidSize && isValidArraySize;
   }
 }
