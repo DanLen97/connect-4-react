@@ -87,7 +87,7 @@ test('check valid move', () => {
   expect(gameState.makeMove({ column: 0 })).toEqual(true);
   expect(gameState.makeMove({ column: 1 })).toEqual(true);
   expect(gameState.makeMove({ column: 0 })).toEqual(false);
-  expect(gameState.makeMove({ column: 1 })).toEqual(false);
+  expect(gameState.makeMove({ column: 1 })).toEqual(true);
 
 });
 
