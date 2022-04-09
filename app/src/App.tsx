@@ -8,10 +8,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const ai = new WasmAiService();
-    ai.init().then(() => {
-      setCount(ai.add(1,3));
-    });
+    setCount(0);
   });
 
 

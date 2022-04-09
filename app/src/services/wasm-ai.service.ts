@@ -19,11 +19,11 @@ export class WasmAiService {
     this.exports = wasm;
   }
 
-  public add(a: number, b: number): number {
+  public test(a: number, b: number): number {
     if (!this.exports) {
       throw new Error('WasmAiService not initialized');
     }
-    const res = this.exports.add(a, b);
+    const res = this.exports.calculateBestMove([1,2,3], 1, 1);
     return res;
   }
 }
