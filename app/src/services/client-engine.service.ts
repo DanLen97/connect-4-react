@@ -1,7 +1,7 @@
 import { Observable, Subject } from 'rxjs';
 import { GameState } from '../models/game-state.model';
 import { GameType } from '../models/game-type.model';
-import { generateDefaultBoard, generateDefaultGameState } from './game-state.constants';
+import { generateDefaultBoard } from './game-state.constants';
 import { GameStateService } from './game-state.service';
 
 export class ClientEngineService {
