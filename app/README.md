@@ -38,3 +38,7 @@ Engine {
   makeMove(move: Move)
   isPlayersMove(player: Player): Promise<bool>
 }
+
+
+
+TEST
