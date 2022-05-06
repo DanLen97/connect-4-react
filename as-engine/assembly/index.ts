@@ -2,6 +2,10 @@
 export function calculateBestMove(board: i32[], width: i32, height: i32): i32 {
   let bestMove = -1;
   let bestScore = -1;
+
+  const emptyTiles = board.filter(b => b === 0);
+  return emptyTiles[Math.floor(Math.random() * emptyTiles.length) as i32];
+
   for (let i = 0; i < width*height; i++) {
     if (board[i] === 0) {
       board[i] = 1;
