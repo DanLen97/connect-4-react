@@ -1,9 +1,13 @@
 {
-  "name": "as-engine",
+  "name": "@danlen97/as-engine",
   "version": "1.0.0",
   "description": "",
   "main": "./build/release",
   "typings": "./build/release",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DanLen97/connect-4-react.git"
+  },
   "scripts": {
     "test": "node tests",
     "asbuild:debug": "asc assembly/index.ts --target debug --exportRuntime",
