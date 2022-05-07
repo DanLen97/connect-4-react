@@ -7,8 +7,12 @@ function App() {
 
   const [count, setCount] = useState(0);
 
+  const service = new WasmAiService();
+
   useEffect(() => {
-    setCount(0);
+    service.init().then(() => {
+      setCount(service.test());
+    });
   });
 
 

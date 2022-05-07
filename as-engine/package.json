@@ -2,8 +2,8 @@
   "name": "@danlen97/as-engine",
   "version": "1.0.1",
   "description": "",
-  "main": "./build/release",
-  "typings": "./build/release",
+  "main": "./dist/release",
+  "typings": "./dist/release",
   "repository": {
     "type": "git",
     "url": "https://github.com/DanLen97/connect-4-react.git"
@@ -26,8 +26,8 @@
   "type": "module",
   "exports": {
     ".": {
-      "import": "./build/release.js",
-      "types": "./build/release.d.ts"
+      "import": "./dist/release.js",
+      "types": "./dist/release.d.ts"
     }
   }
 }
