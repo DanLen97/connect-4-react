@@ -6,7 +6,7 @@ export class WasmAiService {
   public async init(config?: { wasmSource: ArrayBuffer }) {
     const wasmArrayBuffer =
       config ? config.wasmSource :
-      (await fetch('./public/api.wasm').then((res) => res.arrayBuffer()));
+      (await fetch('./api.wasm').then((res) => res.arrayBuffer()));
 
     if (!wasmArrayBuffer) {
       throw new Error('Wasm source is empty');
