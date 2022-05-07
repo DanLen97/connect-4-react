@@ -1,4 +1,4 @@
-import { instantiate, __AdaptedExports } from 'as-engine';
+import { instantiate, __AdaptedExports } from '@danlen97/as-engine';
 
 export class WasmAiService {
   private exports: typeof __AdaptedExports | null = null;
