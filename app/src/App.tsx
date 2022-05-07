@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { WasmAiService } from './services/wasm-ai.service';
+import Gameboard from './components/gameboard/Gameboard';
 
 function App() {
-
   const [count, setCount] = useState(0);
 
   const service = new WasmAiService();
@@ -15,24 +15,15 @@ function App() {
     });
   });
 
-
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          1+3=
-          { count }
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        Connect-4 React
       </header>
+      <div className="Gameboard">
+        <Gameboard></Gameboard>
+      </div>
     </div>
   );
 }
