@@ -1,8 +1,8 @@
 .App {
-  text-align: center;
   display: flex;
   flex-direction: column;
   height: 100vh;
+  text-align: center;
 }
 
 .App-logo {
@@ -17,13 +17,14 @@
 }
 
 .App-header {
+  align-items: center;
   background-color: #282c34;
-  height: 50px;
+  color: white;
   display: flex;
   flex-direction: row;
-  align-items: center;
   font-size: 22px;
-  color: white;
+  height: 50px;
+  justify-content: center;
 }
 
 
