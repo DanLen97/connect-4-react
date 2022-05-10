@@ -4,9 +4,11 @@ export class WasmAiService {
   private exports: typeof __AdaptedExports | null = null;
 
   public async init(config?: { wasmSource: ArrayBuffer }) {
-    const wasmArrayBuffer =
-      config ? config.wasmSource :
-      (await fetch(`${process.env.PUBLIC_URL}/api.wasm`).then((res) => res.arrayBuffer()));
+    const wasmArrayBuffer = config
+      ? config.wasmSource
+      : await fetch(`${process.env.PUBLIC_URL}/api.wasm`).then((res) =>
+        res.arrayBuffer()
+      );
 
     if (!wasmArrayBuffer) {
       throw new Error('Wasm source is empty');

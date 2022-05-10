@@ -16,7 +16,7 @@ export const generateDefaultBoard = (
     height,
     boardState: Array.from({
       length: width * height,
-    }).map((_) => ({})),
+    }).map(() => ({})),
   } as Board);
 
 export const generateDefaultGameState = () =>

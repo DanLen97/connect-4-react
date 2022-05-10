@@ -1,6 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import Gameboard from './components/gameboard/Gameboard';
+import logo from './logo.svg';
+import React from 'react';
 
 function App() {
   return (

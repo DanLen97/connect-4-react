@@ -1,4 +1,5 @@
 import './Gameboard.css';
+import React from 'react';
 
 function Gameboard() {
 

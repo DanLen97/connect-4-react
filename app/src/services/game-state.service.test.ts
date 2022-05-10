@@ -13,7 +13,7 @@ test('initialize default game state', () => {
 
   expect(gameState.boardState.length).toEqual(DEFAULT_HEIGHT * DEFAULT_WIDTH);
   expect(gameState.boardState.map((s) => s.playerId)).toEqual(
-    Array.from({ length: DEFAULT_HEIGHT * DEFAULT_WIDTH }).map((_) => undefined)
+    Array.from({ length: DEFAULT_HEIGHT * DEFAULT_WIDTH }).map(() => undefined)
   );
 });
 
