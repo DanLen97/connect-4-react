@@ -43,6 +43,6 @@ jobs:
         registry-url: https://npm.pkg.github.com/
     - run: npm ci
     - name: Run ESLint
-      run: eslint . --ext .js,.jsx,.ts,.tsx
+      run: npx eslint src/**/*.ts src/**/*.tsx
     - run: npm test
     - run: npm run build --if-present
