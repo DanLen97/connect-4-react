@@ -1,3 +1,4 @@
+import { Board } from '../models/board.model';
 import { GameState } from '../models/game-state.model';
 import { GameType } from '../models/game-type.model';
 import { Player } from '../models/player.model';
@@ -56,7 +57,11 @@ export class GameStateService {
       return false;
     }
 
-    state.board.boardState[moveIdx].playerId = state.currentPlayerId;
+    const newBoard: Board = { ...state.board };
+    newBoard.boardState[moveIdx].playerId = state.currentPlayerId;
+
+    state.board = newBoard;
+
     return true;
   }
 

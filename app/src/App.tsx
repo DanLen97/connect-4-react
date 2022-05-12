@@ -5,37 +5,39 @@ import { GameStateService } from './services/game-state.service';
 import { GameType } from './models/game-type.model';
 import Gameboard from './components/gameboard/Gameboard';
 import logo from './logo.svg';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { Board } from './models/board.model';
+import { BoardEntry } from './models/board-entry.model';
 
 
 function createEngineService({ initialState }: {initialState: GameState}) {
   return new ClientEngineService(new GameStateService({ initialState }));
 }
 
-const engine = createEngineService({
+const EngineServiceContext = React.createContext(createEngineService({
   initialState: {
     players: [],
     currentPlayerId: 1,
     board: {
-      height: 2,
-      width: 2,
-      boardState: [{ playerId: 1 }, { playerId: 0 }, {}, {}],
+      height: 6,
+      width: 7,
+      boardState: Array.from({ length: 6*7 }).map<BoardEntry>(() => ({})),
     },
     gameType: GameType.PVP,
   },
-});
-
-const EngineServiceContext = React.createContext(engine);
+}));
 
 
 
 function App() {
 
   const engine = useContext(EngineServiceContext);
+  const [ board, setBoard ] = useState<Board | undefined>();
 
   useEffect(() => {
     const s = engine.gameStateChanges$.subscribe(gameState => {
-      console.log(gameState);
+      console.log(`Received game state: ${JSON.stringify(gameState)}`);
+      setBoard(gameState.board);
     });
 
     engine.reset({ gameType: GameType.PVP });
@@ -44,6 +46,11 @@ function App() {
     };
   }, [ engine ]);
 
+  const onTileClick = (index: number) => {
+    const column = index;
+    engine.makeMove({ column });
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -51,7 +58,7 @@ function App() {
         Connect-4 React
       </header>
       <div className="Gameboard">
-        <Gameboard></Gameboard>
+        { board && <Gameboard board={board} onTileClick={onTileClick}></Gameboard> }
       </div>
     </div>
   );
