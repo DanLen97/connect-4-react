@@ -8,18 +8,20 @@ type TileClick = (index: number) => void;
 function Gameboard({ board, onTileClick }: { board: Board, onTileClick: TileClick }) {
   console.log('New Gameboard');
   const tiles = board.boardState.map((boardEntry, index) => {
+    let backgroundColor = 'white';
+    if (boardEntry?.playerId === 0) {
+      backgroundColor = 'red';
+    } else if (boardEntry?.playerId === 1) {
+      backgroundColor = 'blue';
+    }
     return (
-      <div key={index} className='tile' onClick={() => onTileClick(index)}>
-        {boardEntry.playerId && boardEntry.playerId.toString()}
+      <div key={index} className='tile' onClick={() => onTileClick(index)} style={{backgroundColor}}>
       </div>
     );
   });
 
   const gridStyle: CSSProperties = {
-    gridTemplateColumns: Array.from(
-      { length: board.width },
-      () => 'auto'
-    ).join(' '),
+    gridTemplateColumns: `repeat(${board.width}, minmax(20px, 70px))`,
   };
 
   return (<div className='grid' style={gridStyle}>{ tiles }</div>);

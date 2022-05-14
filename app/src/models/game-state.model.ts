@@ -4,7 +4,7 @@ import { Player } from './player.model';
 
 export interface GameState {
   board: Board;
-  currentPlayerId: number;
+  currentPlayerId: 0  | 1;
   players: Player[];
   gameType: GameType;
 }

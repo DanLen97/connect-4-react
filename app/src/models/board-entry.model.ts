@@ -1,4 +1,4 @@
 
 export interface BoardEntry {
-  playerId?: number;
+  playerId?: 0 | 1;
 }

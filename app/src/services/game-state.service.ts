@@ -51,7 +51,8 @@ export class GameStateService {
 
     const moveIdx = Array.from({ length: state.board.height })
       .map((_, i) => i * state.board.width + column)
-      .filter((x) => !state.board.boardState[x].playerId)[0];
+      .filter((x) => !state.board.boardState[x].playerId)
+      .at(-1);
 
     if (moveIdx === undefined) {
       return false;

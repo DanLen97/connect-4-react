@@ -47,7 +47,10 @@ function App() {
   }, [ engine ]);
 
   const onTileClick = (index: number) => {
-    const column = index;
+    if (!board) {
+      return undefined;
+    }
+    const column = index % board.width;
     engine.makeMove({ column });
   };
 

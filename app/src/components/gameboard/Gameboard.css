@@ -1,9 +1,21 @@
 .tile {
   border: 1px solid black;
-  width: 100px;
-  height: 100px;
+  border-radius: 100%;
+  min-width: 50px;
+  aspect-ratio: 1;
+  background-color: white;
+}
+
+.tile:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
 }
 
 .grid {
   display: grid;
+  gap: 2px;
+  background-color: black;
+  border: 2px solid black;
+  border-radius: 5px;
+  margin-top: 100px;
 }

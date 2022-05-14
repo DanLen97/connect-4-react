@@ -105,15 +105,22 @@ test('make valid moves', () => {
   expect(gameState.isValidGameState()).toEqual(true);
 
   expect(gameState.makeMove({ column: 0 })).toEqual(true);
-  expect(gameState.makeMove({ column: 1 })).toEqual(true);
-
   expect(gameState.boardState).toEqual([
+    {},
+    {},
     expect.objectContaining({ playerId: 1 } as BoardEntry),
-    expect.objectContaining({ playerId: 1 } as BoardEntry),
-    {}, {}
+    {},
   ]);
 
   expect(gameState.makeMove({ column: 0 })).toEqual(true);
+  expect(gameState.boardState).toEqual([
+    expect.objectContaining({ playerId: 1 } as BoardEntry),
+    {},
+    expect.objectContaining({ playerId: 1 } as BoardEntry),
+    {},
+  ]);
+
+  expect(gameState.makeMove({ column: 1 })).toEqual(true);
   expect(gameState.makeMove({ column: 1 })).toEqual(true);
 
   expect(gameState.boardState).toEqual([
