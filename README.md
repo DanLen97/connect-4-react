@@ -8,4 +8,6 @@ _A web based connect 4 game with React and WebAssembly_
 
 ## TODOs
 
+- [ ] Update as-engine npm package name
+- [ ] Add usefull algorithm to as-engine
 - [ ] ...
