@@ -1,0 +1,15 @@
+.ghost-tile {
+  min-width: 50px;
+  aspect-ratio: 1;
+  background-color: white;
+}
+
+.ghost-tile.border {
+  border: 1px dashed black;
+  border-radius: 100%;
+  animation: blinker 2s linear infinite;
+}
+
+.ghost-tile:hover {
+  cursor: pointer;
+}

@@ -6,16 +6,21 @@
   background-color: white;
 }
 
-.tile:hover {
-  background-color: #f0f0f0;
-  cursor: pointer;
-}
-
 .grid {
   display: grid;
   gap: 2px;
   background-color: black;
   border: 2px solid black;
   border-radius: 5px;
-  margin-top: 100px;
+}
+
+.ghost-grid {
+  display: grid;
+  gap: 2px;
+}
+
+@keyframes blinker {
+  50% {
+    border-color: white;
+  }
 }

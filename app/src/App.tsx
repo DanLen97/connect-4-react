@@ -3,7 +3,7 @@ import { ClientEngineService } from './services/client-engine.service';
 import { GameState } from './models/game-state.model';
 import { GameStateService } from './services/game-state.service';
 import { GameType } from './models/game-type.model';
-import Gameboard from './components/gameboard/Gameboard';
+import Gameboard from './components/Gameboard';
 import logo from './logo.svg';
 import React, { useContext, useEffect, useState } from 'react';
 import { Board } from './models/board.model';
