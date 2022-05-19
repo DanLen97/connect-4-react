@@ -9,33 +9,31 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Board } from './models/board.model';
 import { BoardEntry } from './models/board-entry.model';
 
-
-function createEngineService({ initialState }: {initialState: GameState}) {
+function createEngineService({ initialState }: { initialState: GameState }) {
   return new ClientEngineService(new GameStateService({ initialState }));
 }
 
-const EngineServiceContext = React.createContext(createEngineService({
-  initialState: {
-    players: [],
-    currentPlayerId: 1,
-    board: {
-      height: 6,
-      width: 7,
-      boardState: Array.from({ length: 6*7 }).map<BoardEntry>(() => ({})),
+const EngineServiceContext = React.createContext(
+  createEngineService({
+    initialState: {
+      players: [],
+      currentPlayerId: 1,
+      board: {
+        height: 6,
+        width: 7,
+        boardState: Array.from({ length: 6 * 7 }).map<BoardEntry>(() => ({})),
+      },
+      gameType: GameType.PVP,
     },
-    gameType: GameType.PVP,
-  },
-}));
-
-
+  })
+);
 
 function App() {
-
   const engine = useContext(EngineServiceContext);
-  const [ board, setBoard ] = useState<Board | undefined>();
+  const [board, setBoard] = useState<Board | undefined>();
 
   useEffect(() => {
-    const s = engine.gameStateChanges$.subscribe(gameState => {
+    const s = engine.gameStateChanges$.subscribe((gameState) => {
       console.log(`Received game state: ${JSON.stringify(gameState)}`);
       setBoard(gameState.board);
     });
@@ -44,7 +42,7 @@ function App() {
     return () => {
       s.unsubscribe();
     };
-  }, [ engine ]);
+  }, [engine]);
 
   const onTileClick = (index: number) => {
     if (!board) {
@@ -61,10 +59,12 @@ function App() {
         Connect-4 React
       </header>
       <div className="Gameboard">
-        { board && <Gameboard board={board} onTileClick={onTileClick}></Gameboard> }
+        {board && (
+          <Gameboard board={board} onTileClick={onTileClick}></Gameboard>
+        )}
       </div>
     </div>
   );
 }
 
-export { App, EngineServiceContext};
+export { App, EngineServiceContext };

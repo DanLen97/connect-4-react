@@ -20,13 +20,16 @@ function Gameboard({
   });
 
   const tiles = board.boardState.map((boardEntry, index) => {
-    let backgroundColor = 'white';
+    const backgroundColor = 'white';
+    let chipColor = 'white';
     if (boardEntry?.playerId === 0) {
-      backgroundColor = 'red';
+      chipColor = 'red';
     } else if (boardEntry?.playerId === 1) {
-      backgroundColor = 'blue';
+      chipColor = 'blue';
     }
-    return <div key={index} className="tile" style={{ backgroundColor }}></div>;
+    return (<div key={index} className="tile" style={{ backgroundColor }}>
+      <div className='tile-chip' style={{ backgroundColor: chipColor }}></div>
+    </div>);
   });
 
   const gridStyle: CSSProperties = {
