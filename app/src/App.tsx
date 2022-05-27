@@ -5,16 +5,19 @@ import { GameStateService } from './services/game-state.service';
 import { GameType } from './models/game-type.model';
 import Gameboard from './components/Gameboard';
 import logo from './logo.svg';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Board } from './models/board.model';
 import { BoardEntry } from './models/board-entry.model';
+import { WasmAiService } from './services/wasm-ai.service';
 
-function createEngineService({ initialState }: { initialState: GameState }) {
-  return new ClientEngineService(new GameStateService({ initialState }));
+async function createEngineService({ initialState }: { initialState: GameState }) {
+  const wasmAiService = new WasmAiService();
+  await wasmAiService.init();
+  return new ClientEngineService(new GameStateService({ initialState }), wasmAiService);
 }
 
-const EngineServiceContext = React.createContext(
-  createEngineService({
+async function createDefaultEngineService() {
+  const res = await createEngineService({
     initialState: {
       players: [],
       currentPlayerId: 1,
@@ -25,14 +28,25 @@ const EngineServiceContext = React.createContext(
       },
       gameType: GameType.PVP,
     },
-  })
-);
+  });
+  return res;
+}
 
 function App() {
-  const engine = useContext(EngineServiceContext);
+  const [engine, setEngine] = useState<ClientEngineService | undefined>();
   const [board, setBoard] = useState<Board | undefined>();
 
+  const initEngineService = useCallback(async () => {
+    const res = await createDefaultEngineService();
+    setEngine(res);
+  }, []);
+
   useEffect(() => {
+    initEngineService().catch(console.error);
+  }, [createEngineService]);
+
+  useEffect(() => {
+    if (!engine) return;
     const s = engine.gameStateChanges$.subscribe((gameState) => {
       console.log(`Received game state: ${JSON.stringify(gameState)}`);
       setBoard(gameState.board);
@@ -49,7 +63,7 @@ function App() {
       return undefined;
     }
     const column = index % board.width;
-    engine.makeMove({ column });
+    engine?.makeMove({ column });
   };
 
   return (
@@ -67,4 +81,4 @@ function App() {
   );
 }
 
-export { App, EngineServiceContext };
+export { App };

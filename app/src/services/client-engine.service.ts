@@ -3,6 +3,7 @@ import { GameState } from '../models/game-state.model';
 import { GameType } from '../models/game-type.model';
 import { generateDefaultBoard } from './game-state.constants';
 import { GameStateService } from './game-state.service';
+import { WasmAiService } from './wasm-ai.service';
 
 export class ClientEngineService {
 
@@ -12,7 +13,7 @@ export class ClientEngineService {
     return this.gameStateChanges.asObservable();
   }
 
-  constructor(private gameStateService: GameStateService) {}
+  constructor(private gameStateService: GameStateService, private readonly aiService: WasmAiService) {}
 
   public reset({ gameType }: { gameType: GameType }) {
     const oldGameState = this.gameStateService.gameState;
@@ -31,6 +32,12 @@ export class ClientEngineService {
     }
     this.gameStateChanges.next(this.gameStateService.gameState);
     return true;
+  }
+
+  public makeAiMove(): boolean {
+    const bestMove = this.aiService.calculateBestMove(this.gameStateService.gameState.board);
+
+    return this.makeMove({ column: bestMove % this.gameStateService.gameState.board.width });
   }
 
 

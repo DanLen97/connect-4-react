@@ -1,4 +1,5 @@
 import { instantiate, __AdaptedExports } from '@danlen97/as-engine';
+import { Board } from '../models/board.model';
 
 export class WasmAiService {
   private exports: typeof __AdaptedExports | null = null;
@@ -21,11 +22,12 @@ export class WasmAiService {
     this.exports = wasm;
   }
 
-  public test(): number {
+  public calculateBestMove({ width, height, boardState }: Board): number {
     if (!this.exports) {
       throw new Error('WasmAiService not initialized');
     }
-    const res = this.exports.calculateBestMove([1,2,0], 1, 1);
+    const board: number[] = boardState.map(e => e.playerId ?? 0);
+    const res = this.exports.calculateBestMove(board, width, height);
     return res;
   }
 }
