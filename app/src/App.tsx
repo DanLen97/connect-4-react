@@ -64,6 +64,7 @@ function App() {
     }
     const column = index % board.width;
     engine?.makeMove({ column });
+    engine?.makeAiMove();
   };
 
   return (

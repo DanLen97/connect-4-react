@@ -30,6 +30,7 @@ export class ClientEngineService {
     if (!this.gameStateService?.makeMove({ column })) {
       return false;
     }
+    this.gameStateService.changePlayer();
     this.gameStateChanges.next(this.gameStateService.gameState);
     return true;
   }

@@ -70,6 +70,11 @@ export class GameStateService {
     return this.state.currentPlayerId === player.id;
   }
 
+  // TODO: test this
+  public changePlayer() {
+    this.state.currentPlayerId = this.state.currentPlayerId === 0 ? 1 : 0;
+  }
+
   public isValidGameState(): boolean {
     const state = this.state;
     const isValidSize = state.board.height !== 0 && state.board.width !== 0;
